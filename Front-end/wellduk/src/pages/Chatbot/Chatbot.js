@@ -101,6 +101,7 @@ const TopNav = styled.div`
 	width: 100%;
 	height: 60px;
 	display: flex;
+
 	align-items: center;
 	padding: 0px 10px;
 	position: fixed;
@@ -136,17 +137,16 @@ const UserBox = styled.div`
 	margin: 30px 0px;
 `
 
-const ChatbotTextBox = styled.textarea`
+const ChatbotTextBox = styled.div`
 	display: flex;
 	align-items: center;
 	width: 280px;
-	min-height: 50px;
+	height: 100%;
 	background-color: white;
 	border: 1px solid #fea82f;
 	border-radius: 15px;
 	margin-left: 40px;
 	padding: 20px 15px 20px 40px;
-	resize: vertical;
 `
 
 const UserTextBox = styled.div`
