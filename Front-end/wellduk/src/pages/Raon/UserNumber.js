@@ -41,7 +41,6 @@ function UserNumber() {
 
 	useEffect(() => {
 		raonUseRefetch()
-		raonCurrentRefetch()
 	}, [checkIn])
 
 	const handleCheckIn = async () => {
@@ -52,7 +51,7 @@ function UserNumber() {
 			// 	setRaonUseData(updatedRaonUse)
 			// }
 			// raonUseRefetch()
-			// raonCurrentRefetch()
+			raonCurrentRefetch()
 			setCheckIn('체크아웃')
 			localStorage.setItem('checkInState', '체크아웃')
 		} else {
@@ -61,6 +60,7 @@ function UserNumber() {
 			localStorage.setItem('checkInState', '체크인')
 		}
 		console.log(raonUse)
+		console.log(raonUseData)
 	}
 
 	const handleReset = () => {
@@ -95,13 +95,13 @@ function UserNumber() {
 					<S.TodayContent>
 						<S.Exercise>
 							<S.TimeText>시작</S.TimeText>
-							<S.Time>16:00</S.Time>
+							<S.Time>{raonUseData?.start}</S.Time>
 						</S.Exercise>
 						<S.Exercise>
 							<S.TimeText>종료</S.TimeText>
-							<S.Time>17:45</S.Time>
+							<S.Time>{raonUseData?.end}</S.Time>
 						</S.Exercise>
-						<S.Record>1h 45m</S.Record>
+						<S.Record>{raonUseData?.duration}</S.Record>
 					</S.TodayContent>
 					<S.ResetButton onClick={handleReset}>reset</S.ResetButton>
 				</>
