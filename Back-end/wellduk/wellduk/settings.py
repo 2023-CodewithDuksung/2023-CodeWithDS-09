@@ -331,3 +331,5 @@ LOGGING = {
         },
     }
 }
+
+CSRF_TRUSTED_ORIGINS = ['https://wellduk.shop']
