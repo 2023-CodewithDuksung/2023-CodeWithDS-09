@@ -66,7 +66,7 @@ INSTALLED_APPS = [
 
 
 CORS_ALLOWED_ORIGINS = [
-	'http://localhost:3000',
+   'http://localhost:3000',
 ]
 
 MIDDLEWARE = [
@@ -252,7 +252,7 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 # ACCOUNT_EMAIL_VERIFICATION = "none"
 
-EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = '/' # 사이트와 관련한 자동응답을 받을 이메일 주소,'webmaster@localhost'
+EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = '/user/login/' # 사이트와 관련한 자동응답을 받을 이메일 주소,'webmaster@localhost'
 
 ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
 
@@ -260,6 +260,8 @@ ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
 ACCOUNT_EMAIL_SUBJECT_PREFIX = "[wellduk]"
 
 AUTH_USER_MODEL = 'users.User'
+
+CORS_ALLOW_CREDENTIALS = True
 
 LOG_FILE = '/home/ubuntu/2023-CodeWithDS-09/Back-end/wellduk/log/django.log'
 
@@ -343,4 +345,3 @@ LOGGING = {
         },
     }
 }
-CORS_ALLOW_CREDENTIALS = True
