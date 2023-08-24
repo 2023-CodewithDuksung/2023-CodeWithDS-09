@@ -25,12 +25,15 @@ function Together() {
 				<PartyCard partyName="파티 이름 1" />
 				<PartyCard partyName="파티 이름 2" />
 				<PartyCard partyName="파티 이름 3" />
+				<PartyCard partyName="파티 이름 4" />
+				<PartyCard partyName="파티 이름 5" />
+				<PartyCard partyName="파티 이름 6" />
 			</Box>
 		</div>
 	)
 }
 const Box = styled.div`
-	margin: 30px 18px 150px 18px;
+	margin: 170px 18px 150px 18px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
