@@ -22,6 +22,10 @@ class ChatViewSet(viewsets.ModelViewSet):
 토-일 : 휴무\n\n
 밯학기간 (월~금) : 09:00
             """
+        elif "안녕" in user_input:
+            gpt_response="""
+반갑습니다 웰덕의 챗봇입니다
+"""
         elif '라온센터' in user_input:
             gpt_response = """위치 : 덕성 하나 누리관 라온센터 2층 https://www.google.com/maps/search/?api=1&query=37.650136,127.018915   \n
 

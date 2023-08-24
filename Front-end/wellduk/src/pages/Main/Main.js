@@ -3,7 +3,6 @@ import { IoBarbell } from 'react-icons/io5'
 import { IoMdCheckboxOutline } from 'react-icons/io'
 import { useNavigate } from 'react-router-dom'
 import MenuLogo from '../../img/menu-logo.png'
-
 import styled from 'styled-components'
 
 function Main() {
@@ -62,6 +61,7 @@ const Box = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	margin-bottom: 100px;
 `
 
 const MenuContainer = styled.div`

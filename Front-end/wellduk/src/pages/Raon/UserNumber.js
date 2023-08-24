@@ -3,44 +3,64 @@ import { BsPeople } from 'react-icons/bs'
 import { flexAlignCenter, flexCenter, marginAuto } from '../../styles/common'
 import Button from '../../components/Button/Button'
 import Input from '../../components/Input/Input'
-import StopWatch from './Components/StopWatch'
-// import { useRecoilState } from 'recoil'
-// import { checkInState } from '../../atoms/CheckInState'
+import { useRecoilState } from 'recoil'
+import { checkInState } from '../../atoms/CheckInState'
 import { useEffect, useState } from 'react'
 import useGetRaonCurrent from '../../hooks/useGetRaonCurrent'
 import useGetRaonUse from '../../hooks/useGetRaonUse'
 
 function UserNumber() {
-	// const [checkIn, setCheckIn] = useRecoilState(checkInState)
-	const [checkIn, setCheckIn] = useState('체크인')
+	const [checkIn, setCheckIn] = useRecoilState(checkInState)
+	// const [checkIn, setCheckIn] = useState('체크인')
 	const [exerciseRecordVisible, setExerciseRecordVisible] = useState(false)
 	const [raonCurrentData, setRaonCurrentData] = useState({
 		raon_maximum: 0,
 		raon_current: 0,
 	})
-	const [raonUseData, setRaonUseData] = useState('')
+	const [raonUseData, setRaonUseData] = useState({})
 
 	const { data: raonCurrent, refetch: raonCurrentRefetch } =
 		useGetRaonCurrent()
+
 	const { data: raonUse, refetch: raonUseRefetch } = useGetRaonUse()
+
+	// useEffect(() => {
+	// 	const savedCheckInState = localStorage.getItem('checkInState')
+	// 	if (savedCheckInState) {
+	// 		setCheckIn(savedCheckInState)
+	// 	}
+	// }, [])
 
 	useEffect(() => {
 		setRaonCurrentData(raonCurrent?.data)
 	}, [raonCurrent])
 
+	useEffect(() => {
+		setRaonUseData(raonUse?.data)
+	}, [raonUse])
+
+	useEffect(() => {
+		raonUseRefetch()
+	}, [checkIn])
+
 	const handleCheckIn = async () => {
 		if (checkIn === '체크인') {
+			// if (raonUse === undefined) {
+			// 	const { data: updatedRaonUse } = await useGetRaonUse()
+			// 	console.log(updatedRaonUse)
+			// 	setRaonUseData(updatedRaonUse)
+			// }
+			// raonUseRefetch()
 			raonCurrentRefetch()
 			setCheckIn('체크아웃')
-			raonUseRefetch()
-			console.log(raonUse)
-			console.log(raonCurrentData)
+			localStorage.setItem('checkInState', '체크아웃')
 		} else {
+			// raonUseRefetch()
 			setExerciseRecordVisible(true)
-			raonUseRefetch()
-			console.log(raonUse)
-			console.log(raonCurrentData)
+			localStorage.setItem('checkInState', '체크인')
 		}
+		console.log(raonUse)
+		console.log(raonUseData)
 	}
 
 	const handleReset = () => {
@@ -60,10 +80,14 @@ function UserNumber() {
 						</S.Content>
 					</S.User>
 
-					<S.CheckIn onClick={handleCheckIn}>
-						{checkIn}
-						{checkIn === '체크아웃' && <StopWatch />}
-					</S.CheckIn>
+					{checkIn === '체크인' ? (
+						<S.CheckIn onClick={handleCheckIn}>체크인</S.CheckIn>
+					) : (
+						<S.CheckIn onClick={handleCheckIn}>
+							체크아웃
+							{/* <StopWatch /> */}
+						</S.CheckIn>
+					)}
 				</>
 			) : (
 				<>
@@ -71,13 +95,13 @@ function UserNumber() {
 					<S.TodayContent>
 						<S.Exercise>
 							<S.TimeText>시작</S.TimeText>
-							<S.Time>16:00</S.Time>
+							<S.Time>{raonUseData?.start}</S.Time>
 						</S.Exercise>
 						<S.Exercise>
 							<S.TimeText>종료</S.TimeText>
-							<S.Time>17:45</S.Time>
+							<S.Time>{raonUseData?.end}</S.Time>
 						</S.Exercise>
-						<S.Record>1h 45m</S.Record>
+						<S.Record>{raonUseData?.duration}</S.Record>
 					</S.TodayContent>
 					<S.ResetButton onClick={handleReset}>reset</S.ResetButton>
 				</>
