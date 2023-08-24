@@ -10,7 +10,7 @@ function Main() {
 	const navigate = useNavigate()
 	return (
 		<>
-			<Banner>
+			<Banner onClick={() => navigate('/raon/machine')}>
 				<img src={BannerImg} />
 			</Banner>
 			<Box>
