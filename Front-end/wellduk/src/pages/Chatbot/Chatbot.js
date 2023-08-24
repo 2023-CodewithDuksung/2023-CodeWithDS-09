@@ -60,6 +60,7 @@ function Chatbot() {
 							bottom: '25px',
 						}}
 					/>
+					<ChatbotTextBox></ChatbotTextBox>
 				</ChatbotBox>
 				<UserBox>
 					<UserImg>
