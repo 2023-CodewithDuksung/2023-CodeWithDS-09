@@ -6,7 +6,7 @@ const NAV_TYPE = {
 	raon: [
 		{
 			title: '현재 사용 인원',
-			path: '/raon',
+			path: '/raon/current',
 		},
 		{
 			title: '기구 소개',
@@ -20,7 +20,7 @@ const NAV_TYPE = {
 	community: [
 		{
 			title: '양도해요',
-			path: '/community',
+			path: '/community/assign',
 		},
 		{
 			title: '같이해요',
@@ -29,6 +29,20 @@ const NAV_TYPE = {
 		{
 			title: '소통해요',
 			path: '/community/communication',
+		},
+	],
+	routine: [
+		{
+			title: '초급',
+			path: '/routine/beginning',
+		},
+		{
+			title: '중급',
+			path: '/routine/intermediate',
+		},
+		{
+			title: '고급',
+			path: '/routine/high',
 		},
 	],
 }
@@ -43,8 +57,13 @@ function TopNav({ type }) {
 					<S.Title
 						key={nav.title}
 						type={type}
-						onClick={() => navigate(`${nav.path}`)}
-						state={window.location.pathname === nav.path}
+						onClick={() => {
+							navigate(`${nav.path}`)
+						}}
+						state={
+							window.location.pathname === nav.path ||
+							window.location.pathname.startsWith(nav.path + '/')
+						}
 					>
 						{nav.title}
 					</S.Title>

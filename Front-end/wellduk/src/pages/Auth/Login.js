@@ -3,20 +3,60 @@ import { marginAuto } from '../../styles/common'
 import Input from '../../components/Input/Input'
 import Button from '../../components/Button/Button'
 import { useNavigate } from 'react-router-dom'
+import { useForm } from 'react-hook-form'
+import { useMutation } from '@tanstack/react-query'
+import Api from '../../api/Api'
 
 function Login() {
 	const navigate = useNavigate()
+	const {
+		register,
+		formState: { errors },
+		handleSubmit,
+	} = useForm({ mode: 'onChange' })
+
+	const { mutateAsync } = useMutation(data => {
+		return Api.login(data)
+	})
+
+	const onSubmit = async data => {
+		const UserData = {
+			email: data.email,
+			password: data.pw,
+		}
+
+		try {
+			const { data } = await mutateAsync(UserData)
+			// localStorage.clear()
+			localStorage.setItem('token', data.access)
+			console.log(data.access)
+			navigate('/')
+		} catch (err) {
+			console.log(err)
+		}
+	}
 	return (
 		<S.Wrapper>
 			<S.Title>로그인</S.Title>
-			<S.Form>
+			<S.Form onSubmit={handleSubmit(onSubmit)}>
 				<S.Container>
 					<label>아이디</label>
-					<Input />
+					<Input
+						id="email"
+						{...register('email', {
+							required: {
+								value: true,
+							},
+						})}
+					/>
 				</S.Container>
 				<S.Container>
 					<label>비밀번호</label>
-					<Input />
+					<Input
+						id="pw"
+						type="password"
+						{...register('pw', { required: true })}
+					/>
 				</S.Container>
 				<div onClick={() => navigate('/signup')}>회원가입</div>
 				<Button>로그인</Button>

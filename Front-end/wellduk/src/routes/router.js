@@ -13,6 +13,9 @@ import Together from '../pages/Community/Together'
 import Communication from '../pages/Community/Communication'
 import AssignmentWrite from '../pages/Community/AssignmentWrite'
 import CommunicationWrite from '../pages/Community/CommunicationWrite'
+import Beginning from '../pages/Routine/Beginning'
+import Intermediate from '../pages/Routine/Intermediate'
+import High from '../pages/Routine/High'
 
 const router = createBrowserRouter([
 	{
@@ -36,7 +39,7 @@ const router = createBrowserRouter([
 				element: <TopNav type={'raon'} />,
 				children: [
 					{
-						path: '',
+						path: 'current',
 						element: <UserNumber />,
 					},
 					{
@@ -58,8 +61,12 @@ const router = createBrowserRouter([
 				element: <TopNav type={'community'} />,
 				children: [
 					{
-						path: '',
+						path: 'assign',
 						element: <Assignment />,
+					},
+					{
+						path: 'assign/write',
+						element: <AssignmentWrite />,
 					},
 					{
 						path: 'together',
@@ -68,16 +75,28 @@ const router = createBrowserRouter([
 					{
 						path: 'communication',
 						element: <Communication />,
-						children: [
-							{
-								path: 'write',
-								element: <CommunicationWrite />,
-							},
-						],
 					},
 					{
-						path: 'write',
-						element: <AssignmentWrite />,
+						path: 'communication/write',
+						element: <CommunicationWrite />,
+					},
+				],
+			},
+			{
+				path: 'routine',
+				element: <TopNav type={'routine'} />,
+				children: [
+					{
+						path: 'beginning',
+						element: <Beginning />,
+					},
+					{
+						path: 'intermediate',
+						element: <Intermediate />,
+					},
+					{
+						path: 'high',
+						element: <High />,
 					},
 				],
 			},

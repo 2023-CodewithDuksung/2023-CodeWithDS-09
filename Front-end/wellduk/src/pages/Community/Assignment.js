@@ -6,7 +6,7 @@ function Assignment() {
 	return (
 		<>
 			<Box>
-				<WriteBtn onClick={() => navigate('/community/write')}>
+				<WriteBtn onClick={() => navigate('/community/assign/write')}>
 					글 작성하기
 				</WriteBtn>
 				<ListBox>
