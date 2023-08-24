@@ -10,3 +10,7 @@ class ChatListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Chat
         fields = ['user_input']
+
+
+
+    

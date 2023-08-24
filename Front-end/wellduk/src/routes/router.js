@@ -36,7 +36,7 @@ const router = createBrowserRouter([
 				element: <TopNav type={'raon'} />,
 				children: [
 					{
-						path: '',
+						path: 'current',
 						element: <UserNumber />,
 					},
 					{
@@ -58,8 +58,12 @@ const router = createBrowserRouter([
 				element: <TopNav type={'community'} />,
 				children: [
 					{
-						path: '',
+						path: 'assign',
 						element: <Assignment />,
+					},
+					{
+						path: 'assign/write',
+						element: <AssignmentWrite />,
 					},
 					{
 						path: 'together',
@@ -68,16 +72,10 @@ const router = createBrowserRouter([
 					{
 						path: 'communication',
 						element: <Communication />,
-						children: [
-							{
-								path: 'write',
-								element: <CommunicationWrite />,
-							},
-						],
 					},
 					{
-						path: 'write',
-						element: <AssignmentWrite />,
+						path: 'communication/write',
+						element: <CommunicationWrite />,
 					},
 				],
 			},

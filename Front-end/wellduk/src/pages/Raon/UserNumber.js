@@ -6,24 +6,47 @@ import Input from '../../components/Input/Input'
 import StopWatch from './Components/StopWatch'
 // import { useRecoilState } from 'recoil'
 // import { checkInState } from '../../atoms/CheckInState'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import useGetRaonCurrent from '../../hooks/useGetRaonCurrent'
+import useGetRaonUse from '../../hooks/useGetRaonUse'
 
 function UserNumber() {
 	// const [checkIn, setCheckIn] = useRecoilState(checkInState)
 	const [checkIn, setCheckIn] = useState('체크인')
 	const [exerciseRecordVisible, setExerciseRecordVisible] = useState(false)
+	const [raonCurrentData, setRaonCurrentData] = useState({
+		raon_maximum: 0,
+		raon_current: 0,
+	})
+	const [raonUseData, setRaonUseData] = useState('')
 
-	const handleCheckIn = () => {
+	const { data: raonCurrent, refetch: raonCurrentRefetch } =
+		useGetRaonCurrent()
+	const { data: raonUse, refetch: raonUseRefetch } = useGetRaonUse()
+
+	useEffect(() => {
+		setRaonCurrentData(raonCurrent?.data)
+	}, [raonCurrent])
+
+	const handleCheckIn = async () => {
 		if (checkIn === '체크인') {
+			raonCurrentRefetch()
 			setCheckIn('체크아웃')
+			raonUseRefetch()
+			console.log(raonUse)
+			console.log(raonCurrentData)
 		} else {
 			setExerciseRecordVisible(true)
+			raonUseRefetch()
+			console.log(raonUse)
+			console.log(raonCurrentData)
 		}
 	}
 
 	const handleReset = () => {
 		setExerciseRecordVisible(false)
 		setCheckIn('체크인')
+		raonCurrentRefetch()
 	}
 
 	return (
@@ -32,7 +55,9 @@ function UserNumber() {
 				<>
 					<S.User>
 						<BsPeople size={90} color="#FCECDD" />
-						<S.Content>14/200</S.Content>
+						<S.Content>
+							{raonCurrentData?.raon_current}/30
+						</S.Content>
 					</S.User>
 
 					<S.CheckIn onClick={handleCheckIn}>
@@ -64,7 +89,7 @@ export default UserNumber
 
 const Wrapper = styled.div`
 	width: 80%;
-	${marginAuto}
+	margin: 0 auto 150px auto;
 	${flexAlignCenter}
 	flex-direction: column;
 `
@@ -95,7 +120,7 @@ const CheckIn = styled.button`
 const TodayTitle = styled.div`
 	background-color: ${({ theme }) => theme.COLOR.main};
 	width: 100%;
-	margin: 50px auto;
+	margin: 30px auto;
 	height: 60px;
 	border-radius: 30px;
 	${flexCenter}
@@ -126,7 +151,7 @@ const TimeText = styled.div`
 const Record = styled.div`
 	background-color: ${({ theme }) => theme.COLOR.sub[200]};
 	width: 100%;
-	margin: 50px auto;
+	margin: 30px auto;
 	height: 100px;
 	border-radius: 10px;
 	${flexCenter}
