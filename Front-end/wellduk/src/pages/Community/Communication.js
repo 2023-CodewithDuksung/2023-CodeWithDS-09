@@ -52,7 +52,7 @@ const WriteBtn = styled.button`
 `
 const ListBox = styled.div`
 	width: 330px;
-	height: 430px;
+
 	background-color: white;
 	border-radius: 15px;
 	box-shadow: 5px 5px 5px 5px ${({ theme }) => theme.COLOR.common.gray[100]};
