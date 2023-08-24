@@ -15,7 +15,7 @@ function Navigation() {
 		<NavBox>
 			<NavBar>
 				<NavContainerRaon
-					onClick={() => navigate('/raon')}
+					onClick={() => navigate('/raon/current')}
 					isActive={isRaonPage}
 				>
 					<IoBarbell size="40" />
@@ -29,7 +29,7 @@ function Navigation() {
 				/>
 
 				<NavContainerCommunity
-					onClick={() => navigate('/community')}
+					onClick={() => navigate('/community/assign')}
 					isActive={isCommunityPage}
 				>
 					<BsFillPeopleFill size="40" />
