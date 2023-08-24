@@ -1,6 +1,9 @@
 import { BsFillChatLeftDotsFill, BsFillPeopleFill } from 'react-icons/bs'
 import { IoBarbell } from 'react-icons/io5'
+import { IoMdCheckboxOutline } from 'react-icons/io'
 import { useNavigate } from 'react-router-dom'
+import MenuLogo from '../../img/menu-logo.png'
+
 import styled from 'styled-components'
 
 function Main() {
@@ -8,24 +11,40 @@ function Main() {
 	return (
 		<>
 			<Banner>banner</Banner>
-			<MainContainer>
-				<SubContainer onClick={() => navigate('/chatbot')}>
-					<Chatbot>
-						<BsFillChatLeftDotsFill size="70" color="white" />
-						<Text>챗봇</Text>
-					</Chatbot>
-				</SubContainer>
-				<SubContainer>
-					<Laon onClick={() => navigate('/raon/current')}>
-						<IoBarbell size="70" color="#FEA82F" />
-						<Text>라온센터</Text>
-					</Laon>
-					<Community onClick={() => navigate('/community/assign')}>
-						<BsFillPeopleFill size="70" color="white" />
-						<Text>커뮤니티</Text>
-					</Community>
-				</SubContainer>
-			</MainContainer>
+			<Box>
+				<img
+					src={MenuLogo}
+					style={{
+						width: '210px',
+						height: '133px',
+						display: 'block',
+					}}
+				/>
+				<MenuContainer>
+					<SubContainer>
+						<Chatbot onClick={() => navigate('/chatbot')}>
+							<BsFillChatLeftDotsFill size="70" color="white" />
+							<Text>챗봇</Text>
+						</Chatbot>
+						<Laon onClick={() => navigate('/raon/current')}>
+							<IoBarbell size="70" color="#FEA82F" />
+							<Text>라온센터</Text>
+						</Laon>
+					</SubContainer>
+					<SubContainer>
+						<Community
+							onClick={() => navigate('/community/assign')}
+						>
+							<BsFillPeopleFill size="70" color="white" />
+							<Text>커뮤니티</Text>
+						</Community>
+						<Routine onClick={() => navigate('/routine/beginning')}>
+							<IoMdCheckboxOutline size="70" color="white" />
+							<Text>운동 루틴 추천</Text>
+						</Routine>
+					</SubContainer>
+				</MenuContainer>
+			</Box>
 		</>
 	)
 }
@@ -35,19 +54,25 @@ const Banner = styled.div`
 	padding: 100px;
 	display: flex;
 	justify-content: center;
-	margin-bottom: 40px;
+	margin-bottom: 30px;
 `
 
-const MainContainer = styled.div`
-	margin: 20px;
+const Box = styled.div`
 	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+`
+
+const MenuContainer = styled.div`
+	display: flex;
+	width: 95%;
+	flex-direction: column;
 `
 
 const SubContainer = styled.div`
-	margin-right: 20px;
 	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
+	justify-content: center;
 `
 
 const Chatbot = styled.div`
@@ -56,8 +81,9 @@ const Chatbot = styled.div`
 	justify-content: center;
 	align-items: center;
 	background-color: ${({ theme }) => theme.COLOR.main};
-	width: 150px;
-	height: 280px;
+	width: 165px;
+	height: 165px;
+	border-radius: 30px 0 0 0;
 `
 
 const Laon = styled.div`
@@ -66,8 +92,9 @@ const Laon = styled.div`
 	justify-content: center;
 	align-items: center;
 	background-color: ${({ theme }) => theme.COLOR.sub[300]};
-	width: 180px;
-	height: 130px;
+	width: 165px;
+	height: 165px;
+	border-radius: 0 30px 0 0;
 `
 
 const Community = styled.div`
@@ -76,8 +103,20 @@ const Community = styled.div`
 	justify-content: center;
 	align-items: center;
 	background-color: ${({ theme }) => theme.COLOR.sub[100]};
-	width: 180px;
-	height: 130px;
+	width: 165px;
+	height: 165px;
+	border-radius: 0 0 0 30px;
+`
+
+const Routine = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background-color: ${({ theme }) => theme.COLOR.sub[200]};
+	width: 165px;
+	height: 165px;
+	border-radius: 0 0 30px 0;
 `
 
 const Text = styled.h1`
