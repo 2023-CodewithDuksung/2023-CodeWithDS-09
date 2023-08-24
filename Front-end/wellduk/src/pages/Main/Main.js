@@ -26,13 +26,15 @@ function Main() {
 							<BsFillChatLeftDotsFill size="70" color="white" />
 							<Text>챗봇</Text>
 						</Chatbot>
-						<Laon onClick={() => navigate('/raon')}>
+						<Laon onClick={() => navigate('/raon/current')}>
 							<IoBarbell size="70" color="#FEA82F" />
 							<Text>라온센터</Text>
 						</Laon>
 					</SubContainer>
 					<SubContainer>
-						<Community onClick={() => navigate('/community')}>
+						<Community
+							onClick={() => navigate('/community/assign')}
+						>
 							<BsFillPeopleFill size="70" color="white" />
 							<Text>커뮤니티</Text>
 						</Community>
