@@ -31,6 +31,20 @@ const NAV_TYPE = {
 			path: '/community/communication',
 		},
 	],
+	routine: [
+		{
+			title: '초급',
+			path: '/routine/beginning',
+		},
+		{
+			title: '중급',
+			path: '/routine/intermediate',
+		},
+		{
+			title: '고급',
+			path: '/routine/high',
+		},
+	],
 }
 
 function TopNav({ type }) {
