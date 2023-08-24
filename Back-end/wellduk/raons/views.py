@@ -38,7 +38,7 @@ class UsingGenericAPIView(GenericAPIView):
             response_data = {
                 'username': user.nickname,
                 'use': instance.use,
-                'start': instance.start_time.strftime("%Y-%m-%d %H:%M"),
+                'start': instance.start_time.strftime("%H:%M:%S"),
             }
         else:
             instance.end_time =  timezone.now()+timezone.timedelta(hours=9)
@@ -53,8 +53,8 @@ class UsingGenericAPIView(GenericAPIView):
                 'username': user.nickname,
                 'use': instance.use,
                 'duration': f"{int(hours)}시간 {int(minutes)}분 {int(seconds)}초",
-                'start': time_started.strftime("%Y-%m-%d %H:%M"),
-                'end': time_ended.strftime("%Y-%m-%d %H:%M"),
+                'start': time_started.strftime("%H:%M:%S"),
+                'end': time_ended.strftime("%H:%M:%S"),
             }
         
         instance.save()
