@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-i&^fw!3cvmvkzaw^-fdw24sfsy$@b+m3oo#x9$jl7-kmzy28!i
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['13.125.142.117', '15.164.171.199', 'localhost']
+ALLOWED_HOSTS = ['13.125.142.117', '15.164.171.199', 'localhost', 'wellduk.shop']
 
 
 # Application definition
@@ -229,7 +229,8 @@ EMAIL_USE_TLS = True # TLS 보안 방법
 
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
-URL_FRONT = 'http://15.164.171.199' # 공개적인 웹페이지가 있다면 등록
+# URL_FRONT = 'http://15.164.171.199' # 공개적인 웹페이지가 있다면 등록
+URL_FRONT = 'http://www.wellduk.shop' # 공개적인 웹페이지가 있다면 등록
 
 ACCOUNT_CONFIRM_EMAIL_ON_GET = True # 유저가 받은 링크를 클릭하면 회원가입 완료되게끔
 ACCOUNT_EMAIL_REQUIRED = True
