@@ -67,7 +67,10 @@ INSTALLED_APPS = [
 
 
 CORS_ALLOWED_ORIGINS = [
-   'http://localhost:3000',
+    'http://localhost:3000',
+    'http://www.wellduk.shop',
+    'https://www.wellduk.shop',
+    'https://wellduk.vercel.app',
 ]
 
 MIDDLEWARE = [
@@ -80,6 +83,9 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+URL_FRONT = 'https://wellduk.vercel.app'  # 'http://www.wellduk.shop'로 설정해도 됩니다
+
 
 ROOT_URLCONF = 'wellduk.urls'
 
