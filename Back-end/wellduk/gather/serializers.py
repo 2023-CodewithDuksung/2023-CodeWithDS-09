@@ -7,13 +7,13 @@ class PostListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ['author','title','content','create_dt','url']
+        fields = ['author','title','content','create_dt','url','id']
 
 # 같이해요에 글 작성
 class PostCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
-        fields = ['title','content','image','url']
+        fields = ['title','content','image','url','id']
         extra_kwargs = {
             'image': {'required': False}  # 이미지 필드를 선택적으로 처리
         }
@@ -24,6 +24,6 @@ class PostRetreiveSerializer(serializers.ModelSerializer):
     author = serializers.CharField(source='author.nickname')
     class Meta:
         model=Post
-        fields=['author','title','content','create_dt','image']
+        fields=['author','title','content','create_dt','image','id']
 
 

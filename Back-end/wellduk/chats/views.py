@@ -5,6 +5,8 @@ import openai
 from .serializers import *
 from .permissions import *
 
+openai.api_key = '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'
+
 class ChatViewSet(viewsets.ModelViewSet):
     serializer_class = ChatSerializer
     permission_classes=[CustomReadOnly]
@@ -19,7 +21,7 @@ class ChatViewSet(viewsets.ModelViewSet):
             gpt_response="""
 주중 4일 : 09:00 ~ 20:00 - 교양수업 관계로 매학기 휴관되는 요일이 변동됩니다\n\n
 토-일 : 휴무\n\n
-밯학기간 (월~금) : 09:00
+밯학기간 (월~금) : 09:00 ! 18:00
             """
         elif "안녕" in user_input:
             gpt_response="""
