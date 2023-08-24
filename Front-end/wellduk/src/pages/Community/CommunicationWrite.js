@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import { flexCenter } from '../../styles/common'
+import { BsFillSendFill } from 'react-icons/bs'
 
 function CommunicationWrite() {
 	const navigate = useNavigate()
@@ -16,23 +17,10 @@ function CommunicationWrite() {
 					type="text"
 					placeholder="내용을 입력하세요"
 				></ArticleBox>
-				<AreaBox>
-					<AreaInput
-						type="text"
-						placeholder="위치를 입력하세요"
-						maxLength={'15'}
-					></AreaInput>
-					<AreaSearchBtn>검색</AreaSearchBtn>
-				</AreaBox>
-				<OpenChatBox>
-					<OpenChatInput
-						type="text"
-						placeholder="오픈채팅 주소를 입력하세요"
-					></OpenChatInput>
-					<WriteBtn>
-						<BsFillSendFill color="white" size={'20'} />
-					</WriteBtn>
-				</OpenChatBox>
+
+				<WriteBtn>
+					<BsFillSendFill color="white" size={'20'} />
+				</WriteBtn>
 			</Box>
 		</>
 	)
