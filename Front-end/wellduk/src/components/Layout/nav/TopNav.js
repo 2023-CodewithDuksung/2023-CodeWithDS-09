@@ -79,6 +79,10 @@ const Wrapper = styled.div`
 	${flexAlignCenter};
 	justify-content: space-around;
 	border-bottom: 1px solid ${({ theme }) => theme.COLOR.main};
+	background-color: #fffaf2;
+	position: fixed;
+	top: 80px;
+	width: 100%;
 `
 
 const Title = styled.div`

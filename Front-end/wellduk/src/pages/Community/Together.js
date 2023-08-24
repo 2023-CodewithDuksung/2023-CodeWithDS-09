@@ -22,15 +22,17 @@ function Together() {
 	return (
 		<div>
 			<Box>
-				<PartyCard partyName="파티 이름 1" />
-				<PartyCard partyName="파티 이름 2" />
-				<PartyCard partyName="파티 이름 3" />
+				<PartyCard partyName="우이천 아침 조깅" />
+				<PartyCard partyName="매일 아침 스트레칭" />
+				<PartyCard partyName="매주 1kg 감량" />
+				<PartyCard partyName="주 1회 등산" />
+				<PartyCard partyName="주 4일 1만보 걷기" />
 			</Box>
 		</div>
 	)
 }
 const Box = styled.div`
-	margin: 30px 18px 150px 18px;
+	margin: 160px 18px 150px 18px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;

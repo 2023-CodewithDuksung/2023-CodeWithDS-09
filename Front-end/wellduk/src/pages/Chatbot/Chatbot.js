@@ -1,42 +1,91 @@
 import styled from 'styled-components'
 import { IoChevronBackSharp } from 'react-icons/io5'
-import { BsPersonCircle } from 'react-icons/bs'
-
 import Logo from '../../img/logo.png'
 import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
+import { useMutation } from '@tanstack/react-query'
+import Api from '../../api/Api'
+import useGetChat from '../../hooks/useGetChat'
+import { BsPersonCircle } from 'react-icons/bs'
 
 function Chatbot() {
+	const openAiKey = process.env.REACT_APP_OPENAI_API_KEY
 	const navigate = useNavigate()
+	const [user_input, setUser_input] = useState('')
+	const onChange = e => {
+		setUser_input(e.target.value)
+	}
+	console.log(user_input)
+	const { mutateAsync } = useMutation(data => {
+		console.log(data)
+		return Api.chatPost(data)
+	})
+
+	const { data, refetch } = useGetChat()
+	console.log(data?.data)
+	// console.log(chatData)
+	const onSubmit = async () => {
+		const { data } = await mutateAsync({ user_input })
+		console.log(data)
+		refetch()
+		setUser_input('')
+	}
+
 	return (
 		<>
 			<TopNav>
 				<IoChevronBackSharp size={'40'} onClick={() => navigate('/')} />
 				<TopNavTitle>챗봇</TopNavTitle>
 			</TopNav>
-			<Box>
-				<ChatbotBox>
-					<img
-						src={Logo}
-						style={{
-							width: '70px',
-							height: '70px',
-							position: 'absolute',
-							bottom: '25px',
-						}}
-					/>
-					<ChatbotTextBox></ChatbotTextBox>
-				</ChatbotBox>
-				<UserBox>
-					<UserImg>
-						<BsPersonCircle size={'68'} />
-					</UserImg>
-					<UserTextBox></UserTextBox>
-				</UserBox>
-			</Box>
-			<RecommendBox></RecommendBox>
+			{data?.data?.map((item, idx) => {
+				return (
+					<Box>
+						<UserBox>
+							<UserImg>
+								<BsPersonCircle size={'68'} />
+							</UserImg>
+							<UserTextBox>{item.user_input}</UserTextBox>
+						</UserBox>
+						<ChatbotBox>
+							<img
+								src={Logo}
+								style={{
+									width: '70px',
+									height: '70px',
+									position: 'absolute',
+									bottom: '25px',
+								}}
+							/>
+							<ChatbotTextBox>{item.gpt_response}</ChatbotTextBox>
+						</ChatbotBox>
+					</Box>
+				)
+			})}
+			{/* {chatData.user_input && (
+				<Box>
+					<UserBox>
+						<UserImg>
+							<BsPersonCircle size={'68'} />
+						</UserImg>
+						<UserTextBox>{chatData.user_input}</UserTextBox>
+					</UserBox>
+					<ChatbotBox>
+						<img
+							src={Logo}
+							style={{
+								width: '70px',
+								height: '70px',
+								position: 'absolute',
+								bottom: '25px',
+							}}
+						/>
+						<ChatbotTextBox>{chatData.gpt_response}</ChatbotTextBox>
+					</ChatbotBox>
+				</Box>
+			)} */}
 			<BottomNav>
-				<UserInput></UserInput>
-				<SendBtn>전송</SendBtn>
+				<UserInput onChange={onChange} value={user_input}></UserInput>
+				<SendBtn onClick={onSubmit}>전송</SendBtn>
 			</BottomNav>
 		</>
 	)
@@ -48,6 +97,11 @@ const TopNav = styled.div`
 	display: flex;
 	align-items: center;
 	padding: 0px 10px;
+	position: fixed;
+	top: 80px;
+	width: 100%;
+	background-color: #fffaf2;
+	z-index: 99;
 `
 
 const TopNavTitle = styled.h2``
@@ -56,6 +110,7 @@ const Box = styled.div`
 	display: flex;
 	flex-direction: column;
 	padding: 40px 20px;
+	margin: 120px 0px 50px 0px;
 `
 
 const ChatbotBox = styled.div`
@@ -113,6 +168,7 @@ const BottomNav = styled.div`
 	justify-content: space-between;
 	align-items: center;
 	padding: 0px 10px;
+	background-color: #fffaf2;
 `
 
 const UserInput = styled.input`

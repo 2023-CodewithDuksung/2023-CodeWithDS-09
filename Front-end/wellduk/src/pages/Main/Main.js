@@ -3,13 +3,16 @@ import { IoBarbell } from 'react-icons/io5'
 import { IoMdCheckboxOutline } from 'react-icons/io'
 import { useNavigate } from 'react-router-dom'
 import MenuLogo from '../../img/menu-logo.png'
+import BannerImg from '../../img/banner.png'
 import styled from 'styled-components'
 
 function Main() {
 	const navigate = useNavigate()
 	return (
 		<>
-			<Banner>banner</Banner>
+			<Banner onClick={() => navigate('/raon/machine')}>
+				<img src={BannerImg} />
+			</Banner>
 			<Box>
 				<img
 					src={MenuLogo}
@@ -49,11 +52,8 @@ function Main() {
 }
 
 const Banner = styled.div`
-	background-color: gray;
-	padding: 100px;
-	display: flex;
-	justify-content: center;
 	margin-bottom: 30px;
+	margin-top: 80px;
 `
 
 const Box = styled.div`
@@ -61,7 +61,7 @@ const Box = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	margin-bottom: 100px;
+	margin-bottom: 150px;
 `
 
 const MenuContainer = styled.div`

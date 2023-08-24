@@ -27,7 +27,7 @@ function CommunicationWrite() {
 }
 
 const Box = styled.div`
-	margin: 30px 18px 150px 18px;
+	margin: 170px 18px 150px 18px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
