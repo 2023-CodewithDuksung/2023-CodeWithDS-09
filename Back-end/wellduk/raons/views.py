@@ -1,6 +1,7 @@
 from rest_framework.response import Response
 from rest_framework.generics import GenericAPIView, ListAPIView
-from datetime import datetime, timezone
+
+from django.utils import timezone
 from .models import Check, Introduce
 from rest_framework.permissions import IsAuthenticated
 from .seriaizers import IntroduceSeriazlier
@@ -32,16 +33,17 @@ class UsingGenericAPIView(GenericAPIView):
                 }
                 return Response(response_data)
 
-            instance.start_time = datetime.now(timezone.utc)
+            instance.start_time = timezone.now()+timezone.timedelta(hours=9)
+            request.session['start']=instance.start_time.strftime("%Y-%m-%d %H:%M"),
             response_data = {
                 'username': user.nickname,
                 'use': instance.use,
                 'start': instance.start_time.strftime("%Y-%m-%d %H:%M"),
             }
         else:
-            instance.end_time = datetime.now(timezone.utc)
+            instance.end_time =  timezone.now()+timezone.timedelta(hours=9)
             time_ended = instance.end_time
-            time_started = instance.start_time
+            time_started = instance.start_time+timezone.timedelta(hours=9)
             time_interval = time_ended - time_started
 
             time_interval_seconds = time_interval.total_seconds() if time_interval.total_seconds() >= 0 else -1
