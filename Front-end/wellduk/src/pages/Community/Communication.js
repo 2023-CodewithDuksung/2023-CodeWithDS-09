@@ -18,9 +18,9 @@ function Communication() {
 					{data?.data?.map(item => {
 						return (
 							<Article>
-								<span>{item.title}</span>
-								<span>{item.content}</span>
-								<span>{item.author}</span>
+								<span>title: {item.title}</span>
+								{/* <span>content: {item.content}</span>
+								<span>author: {item.author}</span> */}
 							</Article>
 						)
 					})}
@@ -70,5 +70,7 @@ const Article = styled.div`
 	display: flex;
 	align-items: center;
 	padding: 0 15px;
+	justify-content: space-between;
+	margin-bottom: 10px;
 `
 export default Communication
