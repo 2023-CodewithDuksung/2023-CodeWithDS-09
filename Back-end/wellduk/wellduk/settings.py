@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-i&^fw!3cvmvkzaw^-fdw24sfsy$@b+m3oo#x9$jl7-kmzy28!i
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['13.125.142.117'] # 도메인, IP 'naver.com'
+ALLOWED_HOSTS = ['13.125.142.117', '15.164.171.199'] # 도메인, IP 'naver.com'
 
 
 # Application definition
