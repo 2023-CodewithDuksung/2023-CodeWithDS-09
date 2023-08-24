@@ -2,67 +2,81 @@ import { BsFillSendFill } from 'react-icons/bs'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import { flexCenter } from '../../styles/common'
-import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import Api from '../../api/Api'
+import { useMutation } from '@tanstack/react-query'
 
 function AssignmentWrite() {
 	const navigate = useNavigate()
-	const [isOpen, setIsOpen] = useState(false)
-	const [address, setAddres] = useState('')
+	const {
+		register,
+		formState: { errors },
+		handleSubmit,
+	} = useForm({ mode: 'onChange' })
 
-	const handleOpenModal = () => {
-		setIsOpen(true)
+	const { mutateAsync } = useMutation(data => {
+		return Api.assignmentWrite(data)
+	})
+
+	const onSubmit = async data => {
+		const submitData = {
+			title: data.title,
+			content: data.content,
+			where: data.where,
+			url: data.url,
+		}
+
+		try {
+			await mutateAsync(submitData)
+			navigate('/community/assign')
+		} catch (err) {
+			console.log(err)
+		}
 	}
-
-	const handleOk = () => {
-		setIsOpen(false)
-	}
-
-	const handleCancle = () => {
-		setIsOpen(false)
-	}
-
-	const handleComplete = data => {
-		console.log(data)
-		// 시.도 저장
-		setAddres(data.address)
-		setIsOpen(false)
-	}
-
 	return (
 		<>
-			<Box>
+			<Box onSubmit={handleSubmit(onSubmit)}>
 				<TitleInput
 					type="text"
 					placeholder="제목을 입력하세요"
 					maxLength={'15'}
+					{...register('title', {
+						required: {
+							value: true,
+						},
+					})}
 				></TitleInput>
 				<ArticleBox
 					type="text"
 					placeholder="내용을 입력하세요"
+					{...register('content', {
+						required: {
+							value: true,
+						},
+					})}
 				></ArticleBox>
 				<AreaBox>
 					<AreaInput
 						type="text"
 						placeholder="위치를 입력하세요"
 						maxLength={'15'}
+						{...register('where', {
+							required: {
+								value: true,
+							},
+						})}
 					></AreaInput>
-					{/* <AreaSearchBtn onClick={handleOpenModal}>
-						검색
-					</AreaSearchBtn> */}
 				</AreaBox>
-				{/* {isOpen && (
-					<Modal
-						visible={true}
-						onOk={handleOk}
-						onCancel={handleCancle}
-					>
-						<DaumPostcode onComplete={handleComplete} />
-					</Modal>
-				)} */}
+
 				<OpenChatBox>
 					<OpenChatInput
 						type="text"
 						placeholder="오픈채팅 주소를 입력하세요"
+						{...register('url', {
+							required: {
+								value: true,
+							},
+						})}
 					></OpenChatInput>
 					<WriteBtn>
 						<BsFillSendFill color="white" size={'20'} />
@@ -73,8 +87,8 @@ function AssignmentWrite() {
 	)
 }
 
-const Box = styled.div`
-	margin: 30px 18px 150px 18px;
+const Box = styled.form`
+	margin: 170px 18px 150px 18px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;

@@ -1,18 +1,28 @@
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
+import useGetHandOver from '../../hooks/useGetHandOver'
 
 function Assignment() {
 	const navigate = useNavigate()
+	const { data, refetch } = useGetHandOver()
+	console.log(data)
 	return (
 		<>
 			<Box>
 				<WriteBtn onClick={() => navigate('/community/assign/write')}>
 					글 작성하기
 				</WriteBtn>
+
 				<ListBox>
-					<Article>
-						<span>글 내용</span>
-					</Article>
+					{data?.data?.map(item => {
+						return (
+							<Article>
+								<span>title: {item.title}</span>
+								{/* <span>content: {item.content}</span>
+								<span>author: {item.author}</span> */}
+							</Article>
+						)
+					})}
 				</ListBox>
 			</Box>
 		</>
@@ -20,7 +30,7 @@ function Assignment() {
 }
 
 const Box = styled.div`
-	margin: 30px 18px 150px 18px;
+	margin: 170px 18px 150px 18px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -59,6 +69,10 @@ const Article = styled.div`
 	display: flex;
 	align-items: center;
 	padding: 0 15px;
+	justify-content: space-between;
+	margin-bottom: 10px;
 `
+
+const Text = styled.div``
 
 export default Assignment

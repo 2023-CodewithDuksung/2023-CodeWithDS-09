@@ -23,7 +23,11 @@ const Container = styled.header`
 	justify-content: space-between;
 	align-items: center;
 	padding: 20px;
-	background-color: ${({ theme }) => theme.COLOR.background};
+	background-color: #fffaf2;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 99;
 `
 
 export default Header

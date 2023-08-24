@@ -1,28 +1,37 @@
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
+import useGetCommunity from '../../hooks/useGetCommunity'
 
 function Communication() {
 	const navigate = useNavigate()
+	const { data, refetch } = useGetCommunity()
 	return (
-		<div>
+		<>
 			<Box>
 				<WriteBtn
 					onClick={() => navigate('/community/communication/write')}
 				>
 					글 작성하기
 				</WriteBtn>
+
 				<ListBox>
-					<Article>
-						<span>글 내용</span>
-					</Article>
+					{data?.data?.map(item => {
+						return (
+							<Article>
+								<span>title: {item.title}</span>
+								{/* <span>content: {item.content}</span>
+								<span>author: {item.author}</span> */}
+							</Article>
+						)
+					})}
 				</ListBox>
 			</Box>
-		</div>
+		</>
 	)
 }
 
 const Box = styled.div`
-	margin: 30px 18px 150px 18px;
+	margin: 170px 18px 150px 18px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -61,5 +70,7 @@ const Article = styled.div`
 	display: flex;
 	align-items: center;
 	padding: 0 15px;
+	justify-content: space-between;
+	margin-bottom: 10px;
 `
 export default Communication

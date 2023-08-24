@@ -9,7 +9,7 @@ class Post(models.Model):
     update_dt = models.DateTimeField('UPDATE DT', auto_now=True)
     image=models.ImageField()
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,related_name='together_post_author' ,null=True)
-    url=models.URLField(null=True)
+    url=models.CharField(max_length=100, null=True)
 
     class Meta:
         ordering = ('update_dt',)
