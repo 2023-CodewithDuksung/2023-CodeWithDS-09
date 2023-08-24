@@ -4,9 +4,45 @@ import { BsPersonCircle } from 'react-icons/bs'
 
 import Logo from '../../img/logo.png'
 import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
+import { useMutation } from '@tanstack/react-query'
+import Api from '../../api/Api'
 
 function Chatbot() {
+	const openAiKey = process.env.REACT_APP_OPENAI_API_KEY
 	const navigate = useNavigate()
+	const [user_input, setUser_input] = useState('')
+	const [messages, setMessages] = useState('')
+	const onChange = e => {
+		setUser_input(e.target.value)
+	}
+	console.log(user_input)
+	const { mutateAsync } = useMutation(data => {
+		console.log(data)
+		return Api.chatPost(data)
+	})
+
+	const onSubmit = async () => {
+		const response = await mutateAsync({ user_input })
+		console.log(response)
+		setUser_input('')
+		// if (!inputText) return
+
+		// // 사용자의 메시지 추가
+		// setMessages([...messages, { text: inputText, type: 'user' }])
+
+		// // OpenAI API에 요청 보내고 응답 받기
+		// try {
+		// 	const response = await mutateAsync({ text: inputText }) // OpenAI API 요청 데이터를 넣어야 함
+
+		// 	// 응답 메시지 추가
+		// 	setMessages([...messages, { text: response.data, type: 'bot' }])
+		// 	setInputText('')
+		// } catch (error) {
+		// 	console.error('Error sending message:', error)
+		// }
+	}
+
 	return (
 		<>
 			<TopNav>
@@ -24,7 +60,6 @@ function Chatbot() {
 							bottom: '25px',
 						}}
 					/>
-					<ChatbotTextBox></ChatbotTextBox>
 				</ChatbotBox>
 				<UserBox>
 					<UserImg>
@@ -35,8 +70,8 @@ function Chatbot() {
 			</Box>
 			<RecommendBox></RecommendBox>
 			<BottomNav>
-				<UserInput></UserInput>
-				<SendBtn>전송</SendBtn>
+				<UserInput onChange={onChange} value={user_input}></UserInput>
+				<SendBtn onClick={onSubmit}>전송</SendBtn>
 			</BottomNav>
 		</>
 	)
