@@ -28,6 +28,7 @@ function SignUp() {
 
 		try {
 			await mutateAsync(UserData)
+			alert('이메일 인증을 진행해주세요')
 			navigate('/login')
 		} catch (err) {
 			console.log(err)
