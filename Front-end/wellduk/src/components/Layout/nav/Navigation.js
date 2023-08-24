@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components'
 import { IoBarbell } from 'react-icons/io5'
 import { BsFillPeopleFill } from 'react-icons/bs'
 import { useNavigate } from 'react-router-dom'
+import Logo from '../../../img/logo.png'
 
 function Navigation() {
 	const navigate = useNavigate()
@@ -23,7 +24,7 @@ function Navigation() {
 				</NavContainerRaon>
 
 				<img
-					src="/img/logo.png"
+					src={Logo}
 					onClick={() => navigate('/chatbot')}
 					style={{ width: '110px', height: '110px' }}
 				/>
