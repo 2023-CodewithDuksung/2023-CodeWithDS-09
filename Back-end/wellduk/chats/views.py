@@ -5,6 +5,7 @@ import openai
 from .serializers import *
 
 class ChatViewSet(viewsets.ModelViewSet):
+    queryset = Chat.objects.all()
     serializer_class = ChatSerializer
     
     def get_queryset(self):
