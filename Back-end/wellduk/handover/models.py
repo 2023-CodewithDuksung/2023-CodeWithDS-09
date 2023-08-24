@@ -13,7 +13,7 @@ class Post(models.Model):
     url=models.URLField(null=True)
 
     class Meta:
-        ordering = ('update_dt',)
+        ordering = ('-id',)
 
     def __str__(self):
         return self.title
