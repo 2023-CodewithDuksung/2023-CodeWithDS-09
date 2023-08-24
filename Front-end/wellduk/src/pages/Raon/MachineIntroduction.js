@@ -1,4 +1,7 @@
 import styled from 'styled-components'
+import RunningMachine from '../../img/running-machine.png'
+import Cycle from '../../img/cycle.jpeg'
+import Stepper from '../../img/stepper.jpeg'
 
 function MachineIntroduction() {
 	return (
@@ -8,7 +11,7 @@ function MachineIntroduction() {
 					<Title>1. 러닝머신</Title>
 					<ContentBox>
 						<img
-							src="/img/running-machine.png"
+							src={RunningMachine}
 							style={{
 								width: '140px',
 								height: '140px',
@@ -41,7 +44,7 @@ function MachineIntroduction() {
 					<Title>2. 사이클</Title>
 					<ContentBox>
 						<img
-							src="/img/cycle.jpeg"
+							src={Cycle}
 							style={{
 								width: '140px',
 								height: '140px',
@@ -62,6 +65,38 @@ function MachineIntroduction() {
 						width="354"
 						height="198"
 						src="https://www.youtube.com/embed/sqC5a78NfQw"
+						title="YouTube video player"
+						frameborder="0"
+						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+						allowfullscreen
+					></iframe>
+				</VideoContainer>
+			</Box2>
+			<Box2>
+				<MachineContainer>
+					<Title>3. 스텝퍼</Title>
+					<ContentBox>
+						<img
+							src={Stepper}
+							style={{
+								width: '140px',
+								height: '140px',
+								borderRadius: '20px',
+							}}
+						/>
+						<Content>
+							스텝퍼는 유산소 운동을 하는 데 사용되는 운동 기구 중
+							하나입니다. 이 기구는 사람들이 계단을 오르내리는
+							움직임을 모방하여 하체 근육을 강화하고 유지하는 데
+							도움이 됩니다.
+						</Content>
+					</ContentBox>
+				</MachineContainer>
+				<VideoContainer>
+					<iframe
+						width="354"
+						height="198"
+						src="https://www.youtube.com/embed/0J3EvGcI4pA?si=VliXH1C7GmRHy_vN"
 						title="YouTube video player"
 						frameborder="0"
 						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
