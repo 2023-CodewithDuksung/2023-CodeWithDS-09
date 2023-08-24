@@ -14,7 +14,7 @@ class Post(models.Model):
     current=models.IntegerField( default=0)
 
     class Meta:
-        ordering = ('update_dt',)
+        ordering = ('-id',)
 
     def __str__(self):
         return self.title
