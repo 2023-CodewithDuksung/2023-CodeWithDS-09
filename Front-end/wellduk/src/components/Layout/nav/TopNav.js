@@ -33,15 +33,15 @@ const NAV_TYPE = {
 	],
 	routine: [
 		{
-			title: '초급',
+			title: '카다시안 힙',
 			path: '/routine/beginning',
 		},
 		{
-			title: '중급',
+			title: '카즈하 복근',
 			path: '/routine/intermediate',
 		},
 		{
-			title: '고급',
+			title: '손흥민 다리',
 			path: '/routine/high',
 		},
 	],
