@@ -1,18 +1,17 @@
 import styled from 'styled-components'
 import { IoChevronBackSharp } from 'react-icons/io5'
-import { BsPersonCircle } from 'react-icons/bs'
-
 import Logo from '../../img/logo.png'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { useMutation } from '@tanstack/react-query'
 import Api from '../../api/Api'
+import useGetChat from '../../hooks/useGetChat'
+import { BsPersonCircle } from 'react-icons/bs'
 
 function Chatbot() {
 	const openAiKey = process.env.REACT_APP_OPENAI_API_KEY
 	const navigate = useNavigate()
 	const [user_input, setUser_input] = useState('')
-	const [messages, setMessages] = useState('')
 	const onChange = e => {
 		setUser_input(e.target.value)
 	}
@@ -22,25 +21,14 @@ function Chatbot() {
 		return Api.chatPost(data)
 	})
 
+	const { data, refetch } = useGetChat()
+	console.log(data?.data)
+	// console.log(chatData)
 	const onSubmit = async () => {
-		const response = await mutateAsync({ user_input })
-		console.log(response)
+		const { data } = await mutateAsync({ user_input })
+		console.log(data)
+		refetch()
 		setUser_input('')
-		// if (!inputText) return
-
-		// // 사용자의 메시지 추가
-		// setMessages([...messages, { text: inputText, type: 'user' }])
-
-		// // OpenAI API에 요청 보내고 응답 받기
-		// try {
-		// 	const response = await mutateAsync({ text: inputText }) // OpenAI API 요청 데이터를 넣어야 함
-
-		// 	// 응답 메시지 추가
-		// 	setMessages([...messages, { text: response.data, type: 'bot' }])
-		// 	setInputText('')
-		// } catch (error) {
-		// 	console.error('Error sending message:', error)
-		// }
 	}
 
 	return (
@@ -49,27 +37,52 @@ function Chatbot() {
 				<IoChevronBackSharp size={'40'} onClick={() => navigate('/')} />
 				<TopNavTitle>챗봇</TopNavTitle>
 			</TopNav>
-			<Box>
-				<ChatbotBox>
-					<img
-						src={Logo}
-						style={{
-							width: '70px',
-							height: '70px',
-							position: 'absolute',
-							bottom: '25px',
-						}}
-					/>
-					<ChatbotTextBox></ChatbotTextBox>
-				</ChatbotBox>
-				<UserBox>
-					<UserImg>
-						<BsPersonCircle size={'68'} />
-					</UserImg>
-					<UserTextBox></UserTextBox>
-				</UserBox>
-			</Box>
-
+			{data?.data?.map((item, idx) => {
+				return (
+					<Box>
+						<UserBox>
+							<UserImg>
+								<BsPersonCircle size={'68'} />
+							</UserImg>
+							<UserTextBox>{item.user_input}</UserTextBox>
+						</UserBox>
+						<ChatbotBox>
+							<img
+								src={Logo}
+								style={{
+									width: '70px',
+									height: '70px',
+									position: 'absolute',
+									bottom: '25px',
+								}}
+							/>
+							<ChatbotTextBox>{item.gpt_response}</ChatbotTextBox>
+						</ChatbotBox>
+					</Box>
+				)
+			})}
+			{/* {chatData.user_input && (
+				<Box>
+					<UserBox>
+						<UserImg>
+							<BsPersonCircle size={'68'} />
+						</UserImg>
+						<UserTextBox>{chatData.user_input}</UserTextBox>
+					</UserBox>
+					<ChatbotBox>
+						<img
+							src={Logo}
+							style={{
+								width: '70px',
+								height: '70px',
+								position: 'absolute',
+								bottom: '25px',
+							}}
+						/>
+						<ChatbotTextBox>{chatData.gpt_response}</ChatbotTextBox>
+					</ChatbotBox>
+				</Box>
+			)} */}
 			<BottomNav>
 				<UserInput onChange={onChange} value={user_input}></UserInput>
 				<SendBtn onClick={onSubmit}>전송</SendBtn>
