@@ -2,9 +2,31 @@ import { BsFillSendFill } from 'react-icons/bs'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import { flexCenter } from '../../styles/common'
+import { useState } from 'react'
 
 function AssignmentWrite() {
 	const navigate = useNavigate()
+	const [isOpen, setIsOpen] = useState(false)
+	const [address, setAddres] = useState('')
+
+	const handleOpenModal = () => {
+		setIsOpen(true)
+	}
+
+	const handleOk = () => {
+		setIsOpen(false)
+	}
+
+	const handleCancle = () => {
+		setIsOpen(false)
+	}
+
+	const handleComplete = data => {
+		console.log(data)
+		// 시.도 저장
+		setAddres(data.address)
+		setIsOpen(false)
+	}
 
 	return (
 		<>
@@ -24,8 +46,19 @@ function AssignmentWrite() {
 						placeholder="위치를 입력하세요"
 						maxLength={'15'}
 					></AreaInput>
-					<AreaSearchBtn>검색</AreaSearchBtn>
+					{/* <AreaSearchBtn onClick={handleOpenModal}>
+						검색
+					</AreaSearchBtn> */}
 				</AreaBox>
+				{/* {isOpen && (
+					<Modal
+						visible={true}
+						onOk={handleOk}
+						onCancel={handleCancle}
+					>
+						<DaumPostcode onComplete={handleComplete} />
+					</Modal>
+				)} */}
 				<OpenChatBox>
 					<OpenChatInput
 						type="text"
@@ -85,7 +118,8 @@ const AreaBox = styled.div`
 `
 
 const AreaInput = styled.input`
-	width: 235px;
+	/* width: 235px; */
+	width: 330px;
 	height: 50px;
 	background-color: ${({ theme }) => theme.COLOR.sub[300]};
 	border-radius: 15px;
