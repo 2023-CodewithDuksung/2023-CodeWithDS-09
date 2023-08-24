@@ -16,7 +16,7 @@ function Login() {
 	} = useForm({ mode: 'onChange' })
 
 	const { mutateAsync } = useMutation(data => {
-		Api.login(data)
+		return Api.login(data)
 	})
 
 	const onSubmit = async data => {
@@ -26,7 +26,10 @@ function Login() {
 		}
 
 		try {
-			await mutateAsync(UserData)
+			const { data } = await mutateAsync(UserData)
+			// localStorage.clear()
+			localStorage.setItem('token', data.access)
+			console.log(data.access)
 			navigate('/')
 		} catch (err) {
 			console.log(err)
