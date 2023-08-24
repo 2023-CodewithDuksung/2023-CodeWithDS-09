@@ -1,18 +1,28 @@
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
+import useGetHandOver from '../../hooks/useGetHandOver'
 
 function Assignment() {
 	const navigate = useNavigate()
+	const { data, refetch } = useGetHandOver()
+	console.log(data)
 	return (
 		<>
 			<Box>
 				<WriteBtn onClick={() => navigate('/community/assign/write')}>
 					글 작성하기
 				</WriteBtn>
+
 				<ListBox>
-					<Article>
-						<span>글 내용</span>
-					</Article>
+					{data?.data?.map(item => {
+						return (
+							<Article>
+								<span>{item.title}</span>
+								<span>{item.content}</span>
+								<span>{item.author}</span>
+							</Article>
+						)
+					})}
 				</ListBox>
 			</Box>
 		</>

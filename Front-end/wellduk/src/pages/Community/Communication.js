@@ -1,23 +1,32 @@
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
+import useGetCommunity from '../../hooks/useGetCommunity'
 
 function Communication() {
 	const navigate = useNavigate()
+	const { data, refetch } = useGetCommunity()
 	return (
-		<div>
+		<>
 			<Box>
 				<WriteBtn
 					onClick={() => navigate('/community/communication/write')}
 				>
 					글 작성하기
 				</WriteBtn>
+
 				<ListBox>
-					<Article>
-						<span>글 내용</span>
-					</Article>
+					{data?.data?.map(item => {
+						return (
+							<Article>
+								<span>{item.title}</span>
+								<span>{item.content}</span>
+								<span>{item.author}</span>
+							</Article>
+						)
+					})}
 				</ListBox>
 			</Box>
-		</div>
+		</>
 	)
 }
 
