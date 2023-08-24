@@ -1,9 +1,10 @@
+import { forwardRef } from 'react'
 import { styled } from 'styled-components'
 
-function Input({ ...rest }) {
-	return <S.InputStyle {...rest} />
+function Input({ ...rest }, ref) {
+	return <S.InputStyle ref={ref} {...rest} />
 }
-export default Input
+export default forwardRef(Input)
 
 const InputStyle = styled.input`
 	border: 1px solid ${({ theme }) => theme.COLOR.main};
