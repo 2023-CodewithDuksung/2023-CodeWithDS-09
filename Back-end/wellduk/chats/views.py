@@ -8,6 +8,7 @@ from .permissions import *
 openai.api_key = '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'
 
 class ChatViewSet(viewsets.ModelViewSet):
+    queryset = Chat.objects.all()
     serializer_class = ChatSerializer
     permission_classes=[CustomReadOnly]
 

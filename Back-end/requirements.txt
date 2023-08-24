@@ -12,6 +12,7 @@ defusedxml==0.7.1
 dj-rest-auth==4.0.0
 Django==4.2.4
 django-allauth==0.52.0
+django-cors-headers==4.2.0
 djangorestframework==3.14.0
 djangorestframework-simplejwt==5.3.0
 frozenlist==1.4.0

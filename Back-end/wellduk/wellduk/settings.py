@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-i&^fw!3cvmvkzaw^-fdw24sfsy$@b+m3oo#x9$jl7-kmzy28!i
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['13.125.142.117', '15.164.171.199', 'localhost', 'wellduk.shop']
 
 
 # Application definition
@@ -67,7 +67,10 @@ INSTALLED_APPS = [
 
 
 CORS_ALLOWED_ORIGINS = [
-   'http://localhost:3000',
+    'http://localhost:3000',
+    'http://www.wellduk.shop',
+    'https://www.wellduk.shop',
+    'https://wellduk.vercel.app',
 ]
 
 MIDDLEWARE = [
@@ -80,6 +83,9 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+URL_FRONT = 'https://wellduk.vercel.app'  # 'http://www.wellduk.shop'로 설정해도 됩니다
+
 
 ROOT_URLCONF = 'wellduk.urls'
 
@@ -230,6 +236,7 @@ EMAIL_USE_TLS = True # TLS 보안 방법
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 # URL_FRONT = 'http://15.164.171.199' # 공개적인 웹페이지가 있다면 등록
+URL_FRONT = 'http://www.wellduk.shop' # 공개적인 웹페이지가 있다면 등록
 
 ACCOUNT_CONFIRM_EMAIL_ON_GET = True # 유저가 받은 링크를 클릭하면 회원가입 완료되게끔
 ACCOUNT_EMAIL_REQUIRED = True
@@ -245,3 +252,90 @@ ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
 ACCOUNT_EMAIL_SUBJECT_PREFIX = "[wellduk]"
 
 AUTH_USER_MODEL = 'users.User'
+
+CORS_ALLOW_CREDENTIALS = True
+
+LOG_FILE = '/home/ubuntu/2023-CodeWithDS-09/Back-end/wellduk/log/django.log'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'formatters': {
+        'standard': {
+            'format': '%(asctime)s [%(levelname)s] %(name)s: %(message)s'
+        },
+    },
+    'handlers': {
+        'null': {
+            'level': 'DEBUG',
+            'class': 'logging.NullHandler',
+        },
+        'logfile': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.TimedRotatingFileHandler',
+            'filename': LOG_FILE,
+            'when': "midnight",  # 매 자정마다
+            'backupCount': 31,
+            'formatter': 'standard',
+        },
+        'console': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'formatter': 'standard'
+        },
+    },
+    # Loggers (where does the log come from)
+    'loggers': {
+        'repackager': {
+            'handlers': ['console', 'logfile'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'django': {
+            'handlers': ['console', 'logfile'],
+            'propagate': True,
+            'level': 'WARN',
+        },
+        'django.server': {
+            'handlers': ['console', 'logfile'],
+            'propagate': True,
+            'level': 'INFO',
+        },
+        'django.db.backends': {
+            'handlers': ['console', 'logfile'],
+            'level': 'WARN',
+            'propagate': False,
+        },
+        '': {
+            'handlers': ['console', 'logfile'],
+            'level': 'DEBUG',
+        },
+        'raven': {
+            'level': 'DEBUG',
+            'handlers': ['console'],
+            'propagate': False,
+        },
+        'sentry.errors': {
+            'level': 'DEBUG',
+            'handlers': ['console'],
+            'propagate': False,
+        },
+        'gunicorn.error': {
+            'level': 'INFO',
+            'handlers': ['logfile'],
+            'propagate': True,
+        },
+        'gunicorn.access': {
+            'level': 'INFO',
+            'handlers': ['logfile'],
+            'propagate': False,
+        },
+        'django.request': {
+            'handlers': ['logfile'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+    }
+}
+
+CSRF_TRUSTED_ORIGINS = ['https://wellduk.shop']
