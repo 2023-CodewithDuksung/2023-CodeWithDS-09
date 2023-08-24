@@ -116,6 +116,7 @@ const Wrapper = styled.div`
 	margin: 0 auto 150px auto;
 	${flexAlignCenter}
 	flex-direction: column;
+	margin-top: 140px;
 `
 
 const User = styled.div`

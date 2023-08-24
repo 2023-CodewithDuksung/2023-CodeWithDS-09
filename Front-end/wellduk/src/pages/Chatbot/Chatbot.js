@@ -33,7 +33,7 @@ function Chatbot() {
 					<UserTextBox></UserTextBox>
 				</UserBox>
 			</Box>
-			<RecommendBox></RecommendBox>
+
 			<BottomNav>
 				<UserInput></UserInput>
 				<SendBtn>전송</SendBtn>
@@ -48,6 +48,11 @@ const TopNav = styled.div`
 	display: flex;
 	align-items: center;
 	padding: 0px 10px;
+	position: fixed;
+	top: 80px;
+	width: 100%;
+	background-color: #fffaf2;
+	z-index: 99;
 `
 
 const TopNavTitle = styled.h2``
@@ -56,6 +61,7 @@ const Box = styled.div`
 	display: flex;
 	flex-direction: column;
 	padding: 40px 20px;
+	margin: 120px 0px 50px 0px;
 `
 
 const ChatbotBox = styled.div`
@@ -113,6 +119,7 @@ const BottomNav = styled.div`
 	justify-content: space-between;
 	align-items: center;
 	padding: 0px 10px;
+	background-color: #fffaf2;
 `
 
 const UserInput = styled.input`

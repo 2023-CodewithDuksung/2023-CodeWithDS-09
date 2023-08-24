@@ -52,7 +52,7 @@ function Information() {
 }
 
 const Container = styled.div`
-	margin: 20px 18px 150px 18px;
+	margin: 160px 18px 150px 18px;
 `
 
 const Title = styled.span`
