@@ -2,20 +2,56 @@ import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import { flexCenter } from '../../styles/common'
 import { BsFillSendFill } from 'react-icons/bs'
+import { useMutation } from '@tanstack/react-query'
+import Api from '../../api/Api'
+import { useForm } from 'react-hook-form'
 
 function CommunicationWrite() {
 	const navigate = useNavigate()
+	const {
+		register,
+		formState: { errors },
+		handleSubmit,
+	} = useForm({ mode: 'onChange' })
+
+	const { mutateAsync } = useMutation(data => {
+		return Api.communityWrite(data)
+	})
+
+	const onSubmit = async data => {
+		const submitData = {
+			title: data.title,
+			content: data.content,
+		}
+
+		try {
+			await mutateAsync(submitData)
+			navigate('/community/communication')
+		} catch (err) {
+			console.log(err)
+		}
+	}
 	return (
 		<>
-			<Box>
+			<Box onSubmit={handleSubmit(onSubmit)}>
 				<TitleInput
 					type="text"
 					placeholder="제목을 입력하세요"
 					maxLength={'15'}
+					{...register('title', {
+						required: {
+							value: true,
+						},
+					})}
 				></TitleInput>
 				<ArticleBox
 					type="text"
 					placeholder="내용을 입력하세요"
+					{...register('content', {
+						required: {
+							value: true,
+						},
+					})}
 				></ArticleBox>
 
 				<WriteBtn>
@@ -26,7 +62,7 @@ function CommunicationWrite() {
 	)
 }
 
-const Box = styled.div`
+const Box = styled.form`
 	margin: 170px 18px 150px 18px;
 	display: flex;
 	flex-direction: column;
