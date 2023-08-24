@@ -70,7 +70,7 @@ const UserBox = styled.div`
 	margin: 30px 0px;
 `
 
-const ChatbotTextBox = styled.textarea`
+const ChatbotTextBox = styled.div`
 	display: flex;
 	align-items: center;
 	width: 280px;
@@ -82,7 +82,7 @@ const ChatbotTextBox = styled.textarea`
 	padding: 20px 15px 20px 40px;
 `
 
-const UserTextBox = styled.textarea`
+const UserTextBox = styled.div`
 	display: flex;
 	align-items: center;
 	width: 280px;
