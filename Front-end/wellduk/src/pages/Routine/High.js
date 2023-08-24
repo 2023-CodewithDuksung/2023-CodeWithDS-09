@@ -129,7 +129,7 @@ function High() {
 }
 
 const Box1 = styled.div`
-	margin: 40px 18px 150px 18px;
+	margin: 150px 18px 150px 18px;
 `
 
 const Box2 = styled.div`

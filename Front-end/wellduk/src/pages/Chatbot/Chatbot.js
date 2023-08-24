@@ -37,28 +37,33 @@ function Chatbot() {
 				<IoChevronBackSharp size={'40'} onClick={() => navigate('/')} />
 				<TopNavTitle>챗봇</TopNavTitle>
 			</TopNav>
+			<MarginBox></MarginBox>
 			{data?.data?.map((item, idx) => {
 				return (
-					<Box>
-						<UserBox>
-							<UserImg>
-								<BsPersonCircle size={'68'} />
-							</UserImg>
-							<UserTextBox>{item.user_input}</UserTextBox>
-						</UserBox>
-						<ChatbotBox>
-							<img
-								src={Logo}
-								style={{
-									width: '70px',
-									height: '70px',
-									position: 'absolute',
-									bottom: '25px',
-								}}
-							/>
-							<ChatbotTextBox>{item.gpt_response}</ChatbotTextBox>
-						</ChatbotBox>
-					</Box>
+					<div>
+						<Box>
+							<UserBox>
+								<UserImg>
+									<BsPersonCircle size={'68'} />
+								</UserImg>
+								<UserTextBox>{item.user_input}</UserTextBox>
+							</UserBox>
+							<ChatbotBox>
+								<img
+									src={Logo}
+									style={{
+										width: '70px',
+										height: '70px',
+										position: 'absolute',
+										bottom: '25px',
+									}}
+								/>
+								<ChatbotTextBox>
+									{item.gpt_response}
+								</ChatbotTextBox>
+							</ChatbotBox>
+						</Box>
+					</div>
 				)
 			})}
 			{/* {chatData.user_input && (
@@ -83,6 +88,7 @@ function Chatbot() {
 					</ChatbotBox>
 				</Box>
 			)} */}
+			<MarginBox></MarginBox>
 			<BottomNav>
 				<UserInput onChange={onChange} value={user_input}></UserInput>
 				<SendBtn onClick={onSubmit}>전송</SendBtn>
@@ -101,16 +107,21 @@ const TopNav = styled.div`
 	top: 80px;
 	width: 100%;
 	background-color: #fffaf2;
-	z-index: 99;
+	z-index: 10;
 `
 
 const TopNavTitle = styled.h2``
 
+const MarginBox = styled.div`
+	width: 100%;
+	height: 150px;
+`
+
 const Box = styled.div`
 	display: flex;
 	flex-direction: column;
-	padding: 40px 20px;
-	margin: 120px 0px 50px 0px;
+	padding: 0px 20px;
+	margin: 0px 0px 0px 0px;
 `
 
 const ChatbotBox = styled.div`
@@ -125,16 +136,17 @@ const UserBox = styled.div`
 	margin: 30px 0px;
 `
 
-const ChatbotTextBox = styled.div`
+const ChatbotTextBox = styled.textarea`
 	display: flex;
 	align-items: center;
 	width: 280px;
-	height: 60px;
+	min-height: 50px;
 	background-color: white;
 	border: 1px solid #fea82f;
 	border-radius: 15px;
-	margin-left: 30px;
+	margin-left: 40px;
 	padding: 20px 15px 20px 40px;
+	resize: vertical;
 `
 
 const UserTextBox = styled.div`
